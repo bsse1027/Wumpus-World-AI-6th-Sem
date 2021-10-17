@@ -1,1 +1,2 @@
-{"gold":{"col":7,"row":2,"direction":"NONE"},"pits":[{"col":4,"row":5,"direction":"NONE"},{"col":3,"row":6,"direction":"NONE"},{"col":2,"row":9,"direction":"NONE"},{"col":8,"row":9,"direction":"NONE"}],"whmpus":{"col":8,"row":3,"direction":"NONE"}}
+{"gold":{"col":8,"row":3,"direction":"NONE"},"pits":[{"col":4,"row":3,"direction":"NONE"},{"col":6,"row":4,"direction":"NONE"},{"col":2,"row":6,"direction":"NONE"},{"col":9,"row":8,"direction":"NONE"}],"whmpus":{"col":3,"row":2,"direction":"NONE"}}
+

@@ -29,6 +29,8 @@ public class GameRunner {
 			try {
 				//File gameUI = new File("D:\\xampp\\htdocs\\PreSpec.html");
 				URI u = new URI("http://127.0.0.1/final/RandWorld.html");
+
+
 				d.browse(u);
 				
 			} catch (IOException | URISyntaxException e) {
