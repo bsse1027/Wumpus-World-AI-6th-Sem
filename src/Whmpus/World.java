@@ -4,9 +4,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-import org.json.JSONArray;
+/*import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.JSONObject;*/
 
 import Whmpus.Constants.Directions;
 
@@ -19,33 +19,47 @@ class World {
 
     private boolean isWhmpusDead = false;
     private boolean isGoldTaken = false;
+    
   
-    // //World 1
-    // private Coordinates whmpusPosition = new Coordinates(3,1);
-    // private Coordinates goldPosition = new Coordinates(3,2);
-    // private Coordinates[] pitPositions = {
-    //     new Coordinates(3 ,3),
-    //     new Coordinates(4,4),
-    //     new Coordinates(1,3)
-    // };
-   //World 2
-//   private Coordinates whmpusPosition = new Coordinates(1,3);
-//   private Coordinates goldPosition = new Coordinates(2,3);
-//   private Coordinates[] pitPositions = {
-//       new Coordinates(3 ,1),
-//       new Coordinates(3,3),
-//       new Coordinates(4,4)
-//   };
-  //World 3
-  private Coordinates whmpusPosition = new Coordinates(7,3);
-  private Coordinates goldPosition = new Coordinates(6,7);
-  private Coordinates[] pitPositions = {
-      new Coordinates(3 ,1),
-      new Coordinates(4,4)
-  };
+    private Coordinates whmpusPosition;
+    private Coordinates goldPosition;
+    private ArrayList<Coordinates> pitPositions = new ArrayList<>();
+    
+    public World getPrespecifiedWorld() {
+    	
+    	this.whmpusPosition = new Coordinates(7,3);
+    	this.goldPosition = new Coordinates(6,7);
+    	this.pitPositions.add(new Coordinates(3 ,1));
+    	this.pitPositions.add(new Coordinates(4 ,4));
+	  
+    	return this;
+    }
+    
+    public World generateRandomWorld() {
+    	int wumpusCount = 0;
+    	
+    	double wumpusProbability = 0.05;
+    	double pitProbability = 0.05;
+    	
+    	for(int i=2;i<rowCount;i++) {
+    		for(int j=2;j<colCount;j++) {
+    			if(Math.random()<=wumpusProbability && wumpusCount<1) {
+    				this.whmpusPosition = new Coordinates(i, j);
+    				wumpusCount++;
+    				continue;
+    			}
+    			
+    			if(Math.random()<=pitProbability) {
+    				this.pitPositions.add(new Coordinates(i,j));
+    				continue;
+    			}
+    		}
+    	}
+    	return this;
+    }
 
     
-    public void exportMap() {
+    /*public void exportMap() {
     	
     	
     	JSONObject map = new JSONObject();
@@ -71,7 +85,7 @@ class World {
 			e.printStackTrace();
 		}
       	
-    }
+    }*/
     
     public boolean goldTaken() {
 		return isGoldTaken;
@@ -89,7 +103,7 @@ class World {
 		return whmpusPosition;
 	}
     
-    public Coordinates[] getPitPositions() {
+    public ArrayList<Coordinates> getPitPositions() {
 		return pitPositions;
 	}
     
