@@ -36,9 +36,11 @@ class World {
     
     public World generateRandomWorld() {
     	int wumpusCount = 0;
+    	int goldCount=0;
     	
     	double wumpusProbability = 0.05;
     	double pitProbability = 0.05;
+    	double goldProbability = 0.05;
     	
     	for(int i=2;i<rowCount;i++) {
     		for(int j=2;j<colCount;j++) {
@@ -47,11 +49,17 @@ class World {
     				wumpusCount++;
     				continue;
     			}
+				if(Math.random()<=goldProbability && goldCount<1) {
+					this.goldPosition = new Coordinates(i, j);
+					goldCount++;
+					continue;
+				}
     			
     			if(Math.random()<=pitProbability) {
     				this.pitPositions.add(new Coordinates(i,j));
     				continue;
     			}
+
     		}
     	}
     	return this;

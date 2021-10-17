@@ -12,7 +12,7 @@ public class GameRunner {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-			World whmpusWorld = new World().getPrespecifiedWorld();
+			World whmpusWorld = new World().generateRandomWorld();
 
 			Agent agent = new Agent(whmpusWorld);
 		
