@@ -75,10 +75,22 @@ public class Agent {
     	try {
     		
 			movesJSONObject.put("moves", moveList);
-			FileWriter file = new FileWriter("./player-moves.json");
+
+			if(world.isPS==true)
+			{
+				FileWriter file = new FileWriter("./player-moves-ps.json");
+				file.write(movesJSONObject.toString());
+				file.close();
+			}
+			if(world.isPS==false)
+			{
+				FileWriter file = new FileWriter("./player-moves-rand.json");
+				file.write(movesJSONObject.toString());
+				file.close();
+			}
+
 			
-			file.write(movesJSONObject.toString());
-			file.close();
+
 			
 			world.exportMap();
 			

@@ -12,16 +12,22 @@ public class GameRunner {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-			World whmpusWorld = new World().generateRandomWorld();
 
-			Agent agent = new Agent(whmpusWorld);
+			World psWorld = new World().getPrespecifiedWorld();
+			World randWorld = new World().generateRandomWorld();
+
+
+			Agent PsAgent = new Agent(psWorld);
+			Agent RandAgent = new Agent(randWorld);
+
 		
-			agent.moveAgent();
+			PsAgent.moveAgent();
+			RandAgent.moveAgent();
 			
 	
 			Desktop d = Desktop.getDesktop();
 			try {
-				//File gameUI = new File("D:\\xampp\\htdocs\\Wumpus.html");
+				//File gameUI = new File("D:\\xampp\\htdocs\\PreSpec.html");
 				URI u = new URI("http://127.0.0.1/ww/Wumpus.html");
 				d.browse(u);
 				
