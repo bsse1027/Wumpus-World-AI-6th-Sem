@@ -19,12 +19,14 @@ class World {
 
     private boolean isWhmpusDead = false;
     private boolean isGoldTaken = false;
+    public boolean isPS;
 
     private Coordinates whmpusPosition;
     private Coordinates goldPosition;
     private ArrayList<Coordinates> pitPositions = new ArrayList<>();
     
     public World getPrespecifiedWorld() {
+    	isPS=true;
     	
     	this.whmpusPosition = new Coordinates(7,3);
     	this.goldPosition = new Coordinates(6,7);
@@ -35,6 +37,7 @@ class World {
     }
     
     public World generateRandomWorld() {
+    	isPS=false;
     	int wumpusCount = 0;
     	int goldCount=0;
     	
@@ -82,9 +85,18 @@ class World {
 		  	map.put("whmpus", whmpusPosition.creatDirectionJSON());
 	    	map.put("gold", goldPosition.creatDirectionJSON());
 	    	
-	    	FileWriter file = new FileWriter("./game-map.json");
-	    	file.write(map.toString());
-	    	file.close();
+	    	if(isPS==true)
+			{
+				FileWriter file = new FileWriter("./game-map-ps.json");
+				file.write(map.toString());
+				file.close();
+			}
+	    	if(isPS==false)
+			{
+				FileWriter file = new FileWriter("./game-map-rand.json");
+				file.write(map.toString());
+				file.close();
+			}
 	    			
 		} catch (JSONException e1) {
 			e1.printStackTrace();
