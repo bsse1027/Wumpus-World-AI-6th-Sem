@@ -4,8 +4,8 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
     <style>
         td {
-            width: 120px;
-            height: 120px;
+            width: 60px;
+            height: 60px;
             background-color:#91a082;
         }
 
@@ -39,7 +39,7 @@
         }
 
         #score::before {
-            content: "Score ";
+            content: "Score = ";
             color: #f7d570cd;
 
         }
@@ -49,9 +49,10 @@
 <body>
    
                 
-        <h1>Wumpus World - AI Agent</h1>        
+        <h1>Wumpus World played by an AI Agent</h1>        
 
         <div id="score">0</div>
+        <h1 id="positions"></h1>
         <div id="board"></div>
 
 <section>
@@ -98,8 +99,11 @@
         
         console.log("DisplayMap e gese");
         
+        
         var map = mapObject
         var pits = mapObject.pits
+
+        document.getElementById("positions").innerHTML ="Gold Position: "+  map.gold.col+","+map.gold.row+ " || Wumpus Position: "+ map.whmpus.col+","+map.whmpus.row;
 
         if(!goldTaken) {
             goldPosition = mapObject.gold
@@ -149,6 +153,7 @@
                 score += 1000
                 document.getElementById("score").innerHTML = score
                 goldTaken = true
+                alert("Gold Found And Your Score is: "+score);
             }
 
             emptyTable()

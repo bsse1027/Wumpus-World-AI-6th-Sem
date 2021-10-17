@@ -28,7 +28,7 @@ public class GameRunner {
 			Desktop d = Desktop.getDesktop();
 			try {
 				//File gameUI = new File("D:\\xampp\\htdocs\\PreSpec.html");
-				URI u = new URI("http://127.0.0.1/final/RandWorld.html");
+				URI u = new URI("http://127.0.0.1/final/start.html");
 
 
 				d.browse(u);
