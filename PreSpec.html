@@ -92,7 +92,9 @@
     var positions
     var maxMoves 
     
-    emptyTable()
+    
+    emptyTable(1);
+    
     
 
     function displayMap(mapObject) {
@@ -126,10 +128,13 @@
     }
 
    function displayPlayer(playerPositions) {
-        console.log("DisplayPlayer e gese");
+        setTimeout(() => {
+            console.log("DisplayPlayer e gese");
         positions = playerPositions.moves
         maxMoves = positions.length
         movePlayer(maxMoves-1);
+            
+        }, 3000);
     }
 
     function movePlayer(i) {
@@ -156,7 +161,7 @@
                 alert("Gold Found And Your Score is: "+score);
             }
 
-            emptyTable()
+            emptyTable(0)
             
             const aboutToKill = !whmpusKilled && checkCoordinatesEqual(nexPosition,whmpusPosition)
 
@@ -199,7 +204,8 @@
         rawFile.send();
     }
 
-    function emptyTable() {
+    function emptyTable(i) {
+
 
         var container = document.getElementById("board") 
         container.innerHTML = ""

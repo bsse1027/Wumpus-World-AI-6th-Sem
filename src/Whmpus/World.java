@@ -28,9 +28,9 @@ class World {
     public World getPrespecifiedWorld() {
     	isPS=true;
     	
-    	this.whmpusPosition = new Coordinates(7,3);
-    	this.goldPosition = new Coordinates(6,7);
-    	this.pitPositions.add(new Coordinates(3 ,1));
+    	this.whmpusPosition = new Coordinates(4,6);
+    	this.goldPosition = new Coordinates(2,9);
+    	this.pitPositions.add(new Coordinates(5 ,5));
     	this.pitPositions.add(new Coordinates(4 ,4));
 	  
     	return this;

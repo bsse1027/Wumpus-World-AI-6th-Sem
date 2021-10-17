@@ -125,10 +125,13 @@
     }
 
    function displayPlayer(playerPositions) {
+       setTimeout(() => {   
         console.log("DisplayPlayer e gese");
         positions = playerPositions.moves
         maxMoves = positions.length
         movePlayer(maxMoves-1);
+       }, 3000);
+
     }
 
     function movePlayer(i) {
