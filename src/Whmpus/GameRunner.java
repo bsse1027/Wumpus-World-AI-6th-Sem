@@ -3,6 +3,8 @@ package Whmpus;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class GameRunner {
 
@@ -18,10 +20,11 @@ public class GameRunner {
 	
 			Desktop d = Desktop.getDesktop();
 			try {
-				File gameUI = new File("D:\\xampp\\htdocs\\Wumpus.html");
-				d.browse(gameUI.toURI());
+				//File gameUI = new File("http://127.0.0.1/ww/Wumpus.html");
+				URI u = new URI("http://127.0.0.1/ww/Wumpus.html");
+				d.browse(u);
 				
-			} catch (IOException e) {
+			} catch (IOException | URISyntaxException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
