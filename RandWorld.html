@@ -147,7 +147,7 @@
             var nextIndex = j + 1 >= maxMoves ? j : j + 1;
             var nexPosition = positions[nextIndex]
 
-            if (checkCoordinatesEqual(currentPosition,whmpusPosition)) {
+            if (checkCoordinatesEqual(currentPosition,whmpusPosition) && !whmpusKilled) {
                 whmpusKilled = true
                 alert("Wumpus Killed");
             }
@@ -159,7 +159,8 @@
                 alert("Gold Found And Your Score is: "+score);
             }
 
-            emptyTable()
+            emptyTable();
+            readJSON('game-map-rand.json',displayMap);
             
             const aboutToKill = !whmpusKilled && checkCoordinatesEqual(nexPosition,whmpusPosition)
 

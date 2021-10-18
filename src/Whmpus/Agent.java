@@ -24,7 +24,7 @@ public class Agent {
 
     boolean goldCollected = false;
     int runs = 0;
-    int maxRuns = 50;
+    int maxRuns = 10000;
 
     
     public Agent(World world ) {

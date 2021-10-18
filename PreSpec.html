@@ -161,7 +161,8 @@
                 alert("Gold Found And Your Score is: "+score);
             }
 
-            emptyTable(0)
+            emptyTable(0);
+            readJSON('game-map-ps.json',displayMap);
             
             const aboutToKill = !whmpusKilled && checkCoordinatesEqual(nexPosition,whmpusPosition)
 
