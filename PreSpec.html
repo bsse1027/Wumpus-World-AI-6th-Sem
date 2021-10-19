@@ -152,6 +152,7 @@
 
             if (checkCoordinatesEqual(currentPosition,whmpusPosition)) {
                 whmpusKilled = true
+                alert("Wumpus about to get Killed");
             }
 
             if (checkCoordinatesEqual(currentPosition,goldPosition)) {
@@ -172,7 +173,7 @@
                 setContent(elements.player,currentPosition.row,currentPosition.col)
             }      
             movePlayer(--i);
-        }, 200);
+        }, 5);
     }
 
     function checkCoordinatesEqual(point1,point2) {

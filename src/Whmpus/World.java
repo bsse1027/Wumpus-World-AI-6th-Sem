@@ -28,10 +28,19 @@ class World {
     public World getPrespecifiedWorld() {
     	isPS=true;
     	
-    	this.whmpusPosition = new Coordinates(4,6);
-    	this.goldPosition = new Coordinates(2,9);
-    	this.pitPositions.add(new Coordinates(5 ,5));
+    	this.whmpusPosition = new Coordinates(10,5);
+    	this.goldPosition = new Coordinates(5,10);
+    	this.pitPositions.add(new Coordinates(3 ,2));
     	this.pitPositions.add(new Coordinates(4 ,4));
+		this.pitPositions.add(new Coordinates(3 ,6));
+		this.pitPositions.add(new Coordinates(4 ,6));
+		this.pitPositions.add(new Coordinates(1 ,7));
+		this.pitPositions.add(new Coordinates(2 ,8));
+		this.pitPositions.add(new Coordinates(2 ,9));
+		this.pitPositions.add(new Coordinates(5 ,8));
+		this.pitPositions.add(new Coordinates(7 ,9));
+		this.pitPositions.add(new Coordinates(8 ,3));
+		this.pitPositions.add(new Coordinates(6 ,6));
 	  
     	return this;
     }

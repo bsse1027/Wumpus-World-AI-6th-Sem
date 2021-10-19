@@ -155,9 +155,9 @@ public class Agent {
         		} else if ( getVisitedAdjecentCell(playerPosition) != null) {
         			
         			System.out.print("Found Adjacent>> ");
-        			return getVisitedAdjecentCell(playerPosition);
+        			return getVisitedAdjecentCell(playerPosition); }
         			
-        		} else {
+        		 else {
         				return backTrack();
         		}
         		
@@ -273,6 +273,55 @@ public class Agent {
     			whmpusLocation = firstPossibleWhmpusLocation;
     		}
        	}
+
+		if (whmpusPerceptList.size() == 3) {
+
+			System.out.println("Found 3 percepts with stench");
+
+			Coordinates firstPerceptLocation = new Coordinates(whmpusPerceptList.get(0).position);
+			Coordinates secondPerceptLocation = new Coordinates(whmpusPerceptList.get(1).position);
+			Coordinates thirdPerceptLocation = new Coordinates(whmpusPerceptList.get(2).position);
+
+			if(firstPerceptLocation.getCol()==secondPerceptLocation.getCol())
+			{
+				int row = (firstPerceptLocation.getRow()+secondPerceptLocation.getRow())/2;
+				whmpusLocation=new Coordinates(row,firstPerceptLocation.getCol());
+
+			}
+			else if(firstPerceptLocation.getCol()==thirdPerceptLocation.getCol())
+			{
+				int row = (firstPerceptLocation.getRow()+thirdPerceptLocation.getRow())/2;
+				whmpusLocation=new Coordinates(row,firstPerceptLocation.getCol());
+
+			}
+
+			else if(secondPerceptLocation.getCol()==thirdPerceptLocation.getCol())
+			{
+				int row = (secondPerceptLocation.getRow()+thirdPerceptLocation.getRow())/2;
+				whmpusLocation=new Coordinates(row,secondPerceptLocation.getCol());
+
+			}
+
+			else if(firstPerceptLocation.getRow()==secondPerceptLocation.getRow())
+			{
+				int col = (firstPerceptLocation.getCol()+secondPerceptLocation.getCol())/2;
+				whmpusLocation=new Coordinates(firstPerceptLocation.getRow(),col);
+
+			}
+
+			else if(firstPerceptLocation.getRow()==thirdPerceptLocation.getRow())
+			{
+				int col = (firstPerceptLocation.getCol()+thirdPerceptLocation.getCol())/2;
+				whmpusLocation=new Coordinates(firstPerceptLocation.getRow(),col);
+
+			}
+			else if(secondPerceptLocation.getRow()==thirdPerceptLocation.getRow())
+			{
+				int col = (secondPerceptLocation.getCol()+thirdPerceptLocation.getCol())/2;
+				whmpusLocation=new Coordinates(secondPerceptLocation.getRow(),col);
+
+			}
+		}
     	
 //    	if(whmpusPerceptList.size() >= 3) {
 //    		
