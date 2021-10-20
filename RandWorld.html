@@ -54,6 +54,9 @@
         <div id="score">0</div>
         <h1 id="positions"></h1>
         <div class="boardClass"><div id="board"></div></div>
+        <div id="dialog" title="Basic dialog">
+          
+        </div>
         
 
 <section>
@@ -89,6 +92,7 @@
     var goldPosition
     var whmpusPosition
     var score = 0
+    var pitpositions
 
     var positions
     var maxMoves 
@@ -102,6 +106,7 @@
         
         var map = mapObject
         var pits = mapObject.pits
+        pitpositions=mapObject.pits
         document.getElementById("positions").innerHTML ="Gold Position: "+  map.gold.col+","+map.gold.row+ " || Wumpus Position: "+ map.whmpus.col+","+map.whmpus.row;
 
         if(!goldTaken) {
@@ -148,7 +153,8 @@
             var nexPosition = positions[nextIndex]
 
             if (checkCoordinatesEqual(currentPosition,whmpusPosition) && !whmpusKilled) {
-                whmpusKilled = true
+                whmpusKilled = true;
+                
                 alert("Wumpus about to get Killed");
             }
 
@@ -158,6 +164,13 @@
                 goldTaken = true
                 alert("Gold Found And Your Score is: "+score);
             }
+            for(index in pitpositions) {
+            var pit = pitpositions[index]
+            if (checkCoordinatesEqual(currentPosition,pit)) {
+                
+                alert("Oops You fall on Pit & Your Score is: "+score);
+            }
+        }
 
             emptyTable();
             readJSON('game-map-rand.json',displayMap);
@@ -170,7 +183,7 @@
                 setContent(elements.player,currentPosition.row,currentPosition.col)
             }      
             movePlayer(--i);
-        }, 200);
+        }, 20);
     }
 
     function checkCoordinatesEqual(point1,point2) {

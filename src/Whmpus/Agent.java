@@ -17,34 +17,58 @@ public class Agent {
     private Set<Coordinates> visited = new HashSet<Coordinates>();
     private Map<Coordinates,Percept> knowledgeBase = new HashMap<Coordinates,Percept>();
     private ArrayList<Coordinates> moves = new ArrayList<Coordinates>();
+    int [][] arr = new int[15][15];
+	int [][] probability = new int[15][15];
     
     private JSONArray moveList = new JSONArray();
     
     private Coordinates currentPosition;
 
     boolean goldCollected = false;
+    boolean onPit = false;
+    boolean onWumpus =false;
     int runs = 0;
     int maxRuns = 10000;
 
     
     public Agent(World world ) {
     	this.world = world;
-    	currentPosition = new Coordinates(1,1,Directions.EAST);    	
-    }
+    	currentPosition = new Coordinates(1,1,Directions.EAST);
+		for (int i=0;i<15;i++)
+		{
+			for (int j=0; j<15;j++)
+			{
+				arr[i][j]=0;
+				probability[i][j]=0;
+			}
+		}
+
+	}
     
     void moveAgent() {
-    	
-        while (!goldCollected) {
+
+        while (!goldCollected ) {
 
         	runs += 1;
         	
         	Coordinates oldPosition = new Coordinates(currentPosition);
+        	arr[currentPosition.getRow()][currentPosition.getCol()]++;
         	
         	moveList.put(oldPosition.creatDirectionJSON());
         	
         	Percept currentPercept = world.getPercept(currentPosition);
         	knowledgeBase.put(currentPosition, currentPercept);
         	moves.add(new Coordinates(currentPosition));
+			if(world.isPit(currentPosition))
+			{
+				System.out.println("On Pit");
+				break;
+			}
+			if(!world.isWhmpusDead &&world.isWumpus(currentPosition) )
+			{
+				System.out.println("Eaten by Wumpus");
+				break;
+			}
         	
         	Coordinates visitedCoordinate = new Coordinates(currentPosition); 
         	visitedCoordinate.direction	= Directions.NONE;
@@ -99,13 +123,23 @@ public class Agent {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		/*for (int i=0;i<11;i++)
+		{
+			for (int j=0; j<11;j++)
+			{
+				System.out.println(i+","+j+"-->"+probability[i][j]);
+			}
+		}*/
     	
     }
+    //Hell
     
     
     private Coordinates getNextMove(Coordinates playerPosition) {
     	
     	Percept percept = world.getPercept(playerPosition);
+    	boolean Deadlock=false;
     	
     	if (percept.glitter) {
     		goldCollected = true;
@@ -116,11 +150,13 @@ public class Agent {
     		if (percept.stench) {
     			
     			Coordinates possibleWhmpusLocation = locateWhmpus();
+
     			
     			if (possibleWhmpusLocation != null) {
     				System.out.print("Whmpus>>");
     				possibleWhmpusLocation.direction = playerPosition.determineDirection(possibleWhmpusLocation);
     				world.killWhmpus();
+    				probability[possibleWhmpusLocation.getRow()][possibleWhmpusLocation.getCol()]=0;
     				
     				return possibleWhmpusLocation;
     			}
@@ -136,6 +172,56 @@ public class Agent {
     			}
     			
     		} else if (percept.breeze) {
+    			probability[playerPosition.getRow()+1][playerPosition.getCol()]+=25;
+				probability[playerPosition.getRow()][playerPosition.getCol()+1]+=25;
+				probability[playerPosition.getRow()-1][playerPosition.getCol()]+=25;
+				probability[playerPosition.getRow()][playerPosition.getCol()-1]+=25;
+				for (int i=1;i<11;i++)
+				{
+					for (int j=1; j<11;j++)
+					{
+						if(arr[i][j]>50)
+						{
+							int a =probability[playerPosition.getRow()+1][playerPosition.getCol()] ,
+									b=probability[playerPosition.getRow()][playerPosition.getCol()+1]
+									, c=probability[playerPosition.getRow()-1][playerPosition.getCol()], d
+									=probability[playerPosition.getRow()][playerPosition.getCol()-1];
+							Coordinates nextMove=null;
+							int min_ab, min_cd, min;
+							min_ab = a < b ? a : b;
+							min_cd = c < d ? c : d;
+							min = min_ab < min_cd ? min_ab : min_cd;
+							if(min == a)
+							{
+								nextMove=new Coordinates(playerPosition.getRow()+1,playerPosition.getCol());
+							}
+							if(min == b)
+							{
+								nextMove=new Coordinates(playerPosition.getRow(),playerPosition.getCol()+1);
+							}
+							if(min == c)
+							{
+								nextMove=new Coordinates(playerPosition.getRow()-1,playerPosition.getCol());
+							}
+							if(min == d)
+							{
+								nextMove=new Coordinates(playerPosition.getRow(),playerPosition.getCol()-1);
+							}
+
+							/*arr[playerPosition.getRow()+1][playerPosition.getCol()]=0;
+							arr[playerPosition.getRow()][playerPosition.getCol()+1]=-0;
+							arr[playerPosition.getRow()-1][playerPosition.getCol()]=-0;
+							arr[playerPosition.getRow()][playerPosition.getCol()-1]=-0;
+							arr[playerPosition.getRow()][playerPosition.getCol()]=-0;*/
+
+
+							return nextMove;
+						}
+					}
+				}
+
+
+
     		        			
     			Coordinates safeLocation = confirmDanger(playerPosition);
     			

@@ -17,7 +17,7 @@ class World {
     private int rowCount = 10;
     private int colCount = 10;
 
-    private boolean isWhmpusDead = false;
+    public boolean isWhmpusDead = false;
     private boolean isGoldTaken = false;
     public boolean isPS;
 
@@ -27,22 +27,19 @@ class World {
     
     public World getPrespecifiedWorld() {
     	isPS=true;
-    	
-    	this.whmpusPosition = new Coordinates(10,5);
-    	this.goldPosition = new Coordinates(5,10);
-    	this.pitPositions.add(new Coordinates(3 ,2));
-    	this.pitPositions.add(new Coordinates(4 ,4));
+
+		this.whmpusPosition = new Coordinates(6,7);
+		this.goldPosition = new Coordinates(3,5);
+		this.pitPositions.add(new Coordinates(2 ,6));
+		this.pitPositions.add(new Coordinates(3 ,4));
 		this.pitPositions.add(new Coordinates(3 ,6));
-		this.pitPositions.add(new Coordinates(4 ,6));
-		this.pitPositions.add(new Coordinates(1 ,7));
-		this.pitPositions.add(new Coordinates(2 ,8));
-		this.pitPositions.add(new Coordinates(2 ,9));
-		this.pitPositions.add(new Coordinates(5 ,8));
-		this.pitPositions.add(new Coordinates(7 ,9));
-		this.pitPositions.add(new Coordinates(8 ,3));
-		this.pitPositions.add(new Coordinates(6 ,6));
-	  
-    	return this;
+		this.pitPositions.add(new Coordinates(4 ,8));
+		this.pitPositions.add(new Coordinates(5 ,6));
+		this.pitPositions.add(new Coordinates(7 ,3));
+		this.pitPositions.add(new Coordinates(7 ,4));
+
+
+		return this;
     }
     
     public World generateRandomWorld() {
@@ -51,7 +48,7 @@ class World {
     	int goldCount=0;
     	
     	double wumpusProbability = 0.05;
-    	double pitProbability = 0.05;
+    	double pitProbability = 0.1;
     	double goldProbability = 0.05;
     	
     	for(int i=2;i<rowCount;i++) {
@@ -155,6 +152,32 @@ class World {
     	return new Percept(hasbreeze,hasBump,hasGlitter,hasStench,playerPosition);
     	
     }
+
+	boolean isPit(Coordinates playerPosition) {
+
+    	boolean isPit=false;
+
+		for (Coordinates pitPosition: pitPositions) {
+			if(playerPosition.equals(pitPosition))
+			{
+				isPit=true;
+			}
+		}
+		return isPit;
+
+	}
+
+	boolean isWumpus(Coordinates playerPosition) {
+
+		boolean isWump=false;
+
+		if(playerPosition.equals(whmpusPosition))
+		{
+			isWump=true;
+		}
+		return isWump;
+
+	}
     
     
     public void killWhmpus() {

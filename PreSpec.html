@@ -88,6 +88,7 @@
     var goldPosition
     var whmpusPosition
     var score = 0
+    var pitpositions
 
     var positions
     var maxMoves 
@@ -104,8 +105,9 @@
         
         var map = mapObject
         var pits = mapObject.pits
+        pitpositions=mapObject.pits
 
-        document.getElementById("positions").innerHTML ="Gold Position: "+  map.gold.col+","+map.gold.row+ " || Wumpus Position: "+ map.whmpus.col+","+map.whmpus.row;
+        document.getElementById("positions").innerHTML ="Gold Position:[col,row] "+  map.gold.col+","+map.gold.row+ " || Wumpus Position: "+ map.whmpus.col+","+map.whmpus.row;
 
         if(!goldTaken) {
             goldPosition = mapObject.gold
@@ -162,6 +164,15 @@
                 alert("Gold Found And Your Score is: "+score);
             }
 
+            for(index in pitpositions) {
+            var pit = pitpositions[index]
+            if (checkCoordinatesEqual(currentPosition,pit)) {
+                
+                alert("Oops You fall on Pit & Your Score is: "+score);
+            }
+            
+            }
+
             emptyTable(0);
             readJSON('game-map-ps.json',displayMap);
             
@@ -173,7 +184,7 @@
                 setContent(elements.player,currentPosition.row,currentPosition.col)
             }      
             movePlayer(--i);
-        }, 5);
+        }, 20);
     }
 
     function checkCoordinatesEqual(point1,point2) {
