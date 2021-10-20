@@ -207,6 +207,7 @@ public class Agent {
 							{
 								nextMove=new Coordinates(playerPosition.getRow(),playerPosition.getCol()-1);
 							}
+							//arr[i][j]=0;
 
 							/*arr[playerPosition.getRow()+1][playerPosition.getCol()]=0;
 							arr[playerPosition.getRow()][playerPosition.getCol()+1]=-0;

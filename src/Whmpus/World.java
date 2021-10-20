@@ -48,7 +48,7 @@ class World {
     	int goldCount=0;
     	
     	double wumpusProbability = 0.05;
-    	double pitProbability = 0.1;
+    	double pitProbability = 0.2;
     	double goldProbability = 0.05;
     	
     	for(int i=2;i<rowCount;i++) {

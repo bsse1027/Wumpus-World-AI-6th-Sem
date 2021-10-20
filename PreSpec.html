@@ -152,7 +152,7 @@
             var nextIndex = j + 1 >= maxMoves ? j : j + 1;
             var nexPosition = positions[nextIndex]
 
-            if (checkCoordinatesEqual(currentPosition,whmpusPosition)) {
+            if (checkCoordinatesEqual(currentPosition,whmpusPosition && !whmpusKilled)) {
                 whmpusKilled = true
                 alert("Wumpus about to get Killed");
             }
